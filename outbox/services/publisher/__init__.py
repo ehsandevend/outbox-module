@@ -1,3 +1,3 @@
-from .http import SingleHTTPPublisher
+from .http import SingleSaveHTTPPublisher, SingleUpdateHTTPPublisher
 
-__all__ = ["SingleHTTPPublisher"]
+__all__ = ["SingleSaveHTTPPublisher", 'SingleUpdateHTTPPublisher']

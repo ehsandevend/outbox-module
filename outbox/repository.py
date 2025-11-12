@@ -9,7 +9,7 @@ from django.conf import settings
 from outbox.shared.enums import ActionChoices, OutboxTypeChoices
 from outbox.shared.utils import to_dict, bulk_to_dict
 
-PROJECT_TAG = settings.outbox.get("PROJECT_TAG", "payoon")
+PROJECT_TAG = settings.OUTBOX.get("PROJECT_TAG", "")
 
 
 class OutboxRepo:

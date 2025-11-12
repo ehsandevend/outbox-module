@@ -1,7 +1,7 @@
 from typing import TYPE_CHECKING, List, Tuple
 
 if TYPE_CHECKING:
-    from outbox.outbox.models import Outbox
+    from outbox.models import Outbox
     from django.db.models import Model
 
 from django.apps import apps

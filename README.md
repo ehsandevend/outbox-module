@@ -31,7 +31,7 @@ Add the Outbox app configuration to your `INSTALLED_APPS`:
 ```python
 INSTALLED_APPS = [
     # ... your other apps
-    "outbox.outbox.apps.OutboxConfig",
+    "outbox.apps.OutboxConfig",
 ]
 ```
 

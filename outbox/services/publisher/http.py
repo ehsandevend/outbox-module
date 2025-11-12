@@ -4,14 +4,29 @@ from django.conf import settings
 from outbox.services.publisher.base import IOutboxPublisher
 
 
-class SingleHTTPPublisher(IOutboxPublisher):
+class SingleSaveHTTPPublisher(IOutboxPublisher):
 
     def __init__(self):
-        self.url = settings.outbox["OUTBOX"]["HTTP_PUBLISHER"]["NO_SQL_WRAPPER"]["SINGLE"]
+        self.url = settings.CLAIM_LIB["OUTBOX"]["HTTP_PUBLISHER"]["NO_SQL_WRAPPER"]["SINGLE"]["CREATE"]
 
     def publish(self, outbox):
         try:
             response = requests.post(self.url, json=outbox.payload, timeout=10)
+            response.raise_for_status()
+            outbox.mark_as_delivered()
+            return True
+        except Exception as e:
+            outbox.mark_as_failed(str(e))
+            return False
+        
+class SingleUpdateHTTPPublisher(IOutboxPublisher):
+
+    def __init__(self):
+        self.url = settings.CLAIM_LIB["OUTBOX"]["HTTP_PUBLISHER"]["NO_SQL_WRAPPER"]["SINGLE"]["UPDATE"]
+
+    def publish(self, outbox):
+        try:
+            response = requests.patch(f"{self.url}{outbox.payload['id']}", json=outbox.payload, timeout=10)
             response.raise_for_status()
             outbox.mark_as_delivered()
             return True

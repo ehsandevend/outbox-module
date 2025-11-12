@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "outbox-module"
+version = "1.1.2"
+description = "Reusable shared library for nextweekwithus domain components such as Outbox, and shared utilities."
+readme = "README.md"
+requires-python = ">=3.8"
+authors = [
+    {name = "Ehsan Ahmadi"},
+]
+dynamic = ["dependencies"]
+
+[tool.setuptools.dynamic]
+dependencies = {file = "requirements.txt"}
+
+[tool.setuptools.packages.find]
+include = ["outbox*"]

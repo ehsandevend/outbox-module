@@ -28,19 +28,12 @@ class OutboxedLogQueryset(QuerySet):
     def create(self, **kwargs):
         """Override update to create outbox entries only when state_id is being changed"""
         with transaction.atomic():
-            created_count = super().create(**kwargs)
-            if created_count == 0:
-                return created_count
-
-            instances = list(self.all())
-            if not instances:
-                return created_count
-
-            if created_count:
+            created_instance = super().create(**kwargs)
+            if created_instance:
                 self.single_service.create_and_publish(
-                    instances[0], ActionChoices.CREATE
+                    created_instance, ActionChoices.CREATE
                 )
-            return created_count
+            return created_instance
         
     def update(self, **kwargs):
         """Override update to create outbox entries only when state_id is being changed"""

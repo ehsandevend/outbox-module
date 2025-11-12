@@ -7,7 +7,7 @@ from outbox.services.publisher.base import IOutboxPublisher
 class SingleSaveHTTPPublisher(IOutboxPublisher):
 
     def __init__(self):
-        self.url = settings.CLAIM_LIB["OUTBOX"]["HTTP_PUBLISHER"]["NO_SQL_WRAPPER"]["SINGLE"]["CREATE"]
+        self.url = settings.OUTBOX["OUTBOX"]["HTTP_PUBLISHER"]["NO_SQL_WRAPPER"]["SINGLE"]["CREATE"]
 
     def publish(self, outbox):
         try:
@@ -22,7 +22,7 @@ class SingleSaveHTTPPublisher(IOutboxPublisher):
 class SingleUpdateHTTPPublisher(IOutboxPublisher):
 
     def __init__(self):
-        self.url = settings.CLAIM_LIB["OUTBOX"]["HTTP_PUBLISHER"]["NO_SQL_WRAPPER"]["SINGLE"]["UPDATE"]
+        self.url = settings.OUTBOX["OUTBOX"]["HTTP_PUBLISHER"]["NO_SQL_WRAPPER"]["SINGLE"]["UPDATE"]
 
     def publish(self, outbox):
         try:
@@ -37,7 +37,7 @@ class SingleUpdateHTTPPublisher(IOutboxPublisher):
 
 class BulkHTTPPublisher(IOutboxPublisher):
     def __init__(self):
-        self.url = settings.outbox["OUTBOX"]["HTTP_PUBLISHER"]["NO_SQL_WRAPPER"]["BULK"]
+        self.url = settings.OUTBOX["OUTBOX"]["HTTP_PUBLISHER"]["NO_SQL_WRAPPER"]["BULK"]
 
     def publish(self, outbox):
         try:

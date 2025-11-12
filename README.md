@@ -1,10 +1,10 @@
-# Claim Lib
+# outbox module
 
-A reusable shared library for Claim domain components including Outbox pattern implementation, historical logging, and other shared utilities. This library is designed to provide ready-to-use components across all projects in the Claim ecosystem.
+A reusable shared library for nextweekwithus domain components including Outbox pattern implementation, historical logging, and other shared utilities. This library is designed to provide ready-to-use components across all projects in the nextweekwithus ecosystem.
 
 ## Overview
 
-**Claim Lib** is not just an outbox library—it serves as a centralized repository for all shared utilities and components used across Claim projects. Currently includes:
+**outbox module** is not just an outbox library—it serves as a centralized repository for all shared utilities and components used across nextweekwithus projects. Currently includes:
 
 - **Outbox Pattern**: Reliable message publishing with transactional guarantees
 - **Shared Utilities**: Common enums, exceptions, and utility functions
@@ -52,7 +52,7 @@ Configure the outbox settings in your Django settings if needed:
 import os
 
 outbox = {
-    "PROJECT_TAG": "this have to be your project name for example insurance_eclaim",
+    "PROJECT_TAG": "this have to be your project name for example nextweekwithus",
     "OUTBOX": {
         "HTTP_PUBLISHER": {
             "NO_SQL_WRAPPER": {

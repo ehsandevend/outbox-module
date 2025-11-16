@@ -11,6 +11,7 @@ class ActionChoices(IntegerChoices):
     CREATE = 1, "create"
     UPDATE = 2, "update"
     DELETE = 3, "delete"
+    REINDEX = 4, "reindex"
 
 
 class OutboxTypeChoices(IntegerChoices):

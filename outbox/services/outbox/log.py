@@ -7,6 +7,7 @@ from outbox.services.publisher.http import (
 from outbox.shared.enums import ActionChoices
 from .base import IOutboxService
 
+    
 class SingleSaveOutboxService(IOutboxService):
     def __init__(self):
         self.repo = OutboxRepo()

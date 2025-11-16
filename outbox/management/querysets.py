@@ -14,7 +14,7 @@ class OutboxedLogQueryset(QuerySet):
         self.single_service = SingleSaveOutboxService()
         self.single_update_service = SingleUpdateOutboxService()
         self.bulk_service = BulkLogOutboxService()
-
+    
     def bulk_create(self, objs, batch_size=None, ignore_conflicts=False):
         """
         Prevent bulk_create when using this outboxed manager.
@@ -35,6 +35,16 @@ class OutboxedLogQueryset(QuerySet):
                 )
             return created_instance
         
+    def reindex(self, id):
+        try:
+            instance = self.get(id=id)
+        except self.model.DoesNotExist:
+            return False
+        self.single_service.create_and_publish(
+                instance, ActionChoices.REINDEX
+            )
+        return True
+    
     def update(self, **kwargs):
         """Override update to create outbox entries only when state_id is being changed"""
         with transaction.atomic():

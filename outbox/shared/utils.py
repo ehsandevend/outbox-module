@@ -16,10 +16,13 @@ def bulk_to_dict(objs: Iterable[Model]):
 
 
 def _model_to_json_safe_dict(instance: Model):
+    if hasattr(instance, 'outbox_safe_index') and callable(getattr(instance, "outbox_safe_index")):
+        data = instance.outbox_safe_index()
+        return data
+
     data = model_to_dict(instance, fields=[f.name for f in instance._meta.fields])
     data["id"] = instance.pk
     data = {k: serialize_value(v) for k, v in data.items()}
-
     return data
 
 
